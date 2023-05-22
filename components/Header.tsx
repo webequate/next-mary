@@ -145,7 +145,6 @@ const Header: React.FC<HeaderProps> = ({ socialLink }) => {
           </Link>
         </div>
       </div>
-
     </nav>
   );
 };

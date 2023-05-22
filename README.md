@@ -1,4 +1,4 @@
-# Portfolio.WebEquate.com
+# MaryJJohnson.com
 
 This is a Next.js website, using React, TypeScript, and MongoDB.
 
