@@ -7,7 +7,7 @@ interface HeadingProps {
 const Heading: React.FC<HeadingProps> = ({ text }) => {
   return (
     <h2 className="text-2xl font-bold mb-6">
-      <span className="text-accent-dark dark:text-accent-light">{text}</span>
+      <span className="text-dark-1 dark:text-light-1">{text}</span>
     </h2>
   );
 };

@@ -31,7 +31,7 @@ const BooksPage: NextPage<BooksPageProps> = ({ name, socialLinks, books }) => {
         <Heading text="Books" />
         <ul className="flex justify-between">
           {books.map((book, index) => (
-            <li key={index}>
+            <li key={index} className="mx-2">
               <Link
                 key={index}
                 href={book.link}

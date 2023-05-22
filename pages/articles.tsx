@@ -32,7 +32,7 @@ const ArticlesPage: NextPage<ArticlesPageProps> = ({
         className={"text-base text-dark-2 dark:text-light-2"}
       >
         <Heading text="Articles" />
-        <ul className="list-disc list-inside">
+        <ul className="list-disc list-outside ml-5">
           {articles.map((article, index) => (
             <li key={index} className="mb-4">
               {article.link && (

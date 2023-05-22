@@ -32,7 +32,7 @@ const OnlineWorkPage: NextPage<OnlineWorkPageProps> = ({
         className={"text-base text-dark-2 dark:text-light-2"}
       >
         <Heading text="Online Work" />
-        <ul className="list-disc list-inside">
+        <ul className="list-disc list-outside ml-5">
           {onlineWorks.map((onlineWork, index) => (
             <li key={index} className="mb-4">
               <Link
