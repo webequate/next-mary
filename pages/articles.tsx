@@ -35,7 +35,14 @@ const ArticlesPage: NextPage<ArticlesPageProps> = ({
         <ul className="list-disc list-inside">
           {articles.map((article, index) => (
             <li key={index} className="mb-4">
-              {article.link && <Link href={article.link}>{article.name}</Link>}
+              {article.link && (
+                <Link
+                  href={article.link}
+                  className="hover:text-accent-dark dark:hover:text-accent-light"
+                >
+                  {article.name}
+                </Link>
+              )}
               {!article.link && article.name}
             </li>
           ))}

@@ -35,7 +35,12 @@ const OnlineWorkPage: NextPage<OnlineWorkPageProps> = ({
         <ul className="list-disc list-inside">
           {onlineWorks.map((onlineWork, index) => (
             <li key={index} className="mb-4">
-              <Link href={onlineWork.link}>{onlineWork.name}</Link>
+              <Link
+                href={onlineWork.link}
+                className="hover:text-accent-dark dark:hover:text-accent-light"
+              >
+                {onlineWork.name}
+              </Link>
             </li>
           ))}
         </ul>
