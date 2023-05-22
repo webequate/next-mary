@@ -1,0 +1,20 @@
+[
+  {
+    "name":"Your Fascinating Family History",
+    "image": "images/book-3.png",
+    "link": "http://cherrylakepublishing.com/shop/show/10553",
+    "order": 1
+  },
+  {
+    "name":"Primary Source Teaching the Web 2.0 Way",
+    "image": "images/book-2.png",
+    "link": "http://abc-clio.com/product.aspx?isbn=9781586833350",
+    "order": 2
+  },
+  {
+    "name": "Primary Sources in the Library",
+    "image": "images/book-1.png",
+    "link": "http://abc-clio.com/product.aspx?isbn=9781586830755",
+    "order": 3
+  }
+]

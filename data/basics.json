@@ -1,0 +1,37 @@
+{
+  "name": "Mary J Johnson",
+  "titles": [
+    "Author / Blogger / Educational Consultant",
+    "Library of Congress American Memory Fellow",
+    "Primary Source Teaching Expert"
+  ],
+  "summaryItems": [
+    "Welcome to my Mary J. Johnson Education Consulting website! I am an education consultant working primarily in support of a Library of Congress Teaching with Primary Sources grant to Metropolitan State University of Denver. My responsibilities include:",
+    "Coordinating the TPS Teachers Network, an 8000-member professional social media platform designed to host and facilitate community conversations, connections, and collaborations that focus on using Library of Congress primary sources to improve student learning.",
+    "Training and overseeing a cadre of fourteen TPS Teachers Network mentors who actively participate in the TPS Teachers Network in support of all users.",
+    "Working with the TPS Teachers Network administrative team to plan, approve, develop, test, and implement technical enhancements to the TPS Teachers Network.",
+    "Supporting thirty member institutions of the TPS Consortium, as well as regional grantees, as they incorporate the TPS Teachers Network into their programs."
+  ],
+  "aboutIntro": "Welcome to my Mary J. Johnson Education Consulting website! I am an education consultant working primarily in support of a Library of Congress Teaching with Primary Sources grant to Metropolitan State University of Denver.",
+  "aboutItems": [
+    "When I began teaching high school French in rural Iowa nearly fifty years ago, I never dreamed that my path would lead me to teaching jobs in France, Germany, and Colorado and eventually into the field of school librarianship. I ended my full-time teaching career as Library Media Specialist and Technology Coordinator at Eagleview Middle School in Colorado Springs in 2005.",
+    "Today I work as an education consultant on a grant project of the Library of Congress Education Outreach Department. My professional interests include teaching with primary sources, student centered inquiry, questioning skills, and literacy. I have written three books, published many articles, authored the Primary Source Librarian blog (currently on hiatus), and presented too many primary source workshops to count!",
+    "I've been married for forty-five years to artist Roger Hayden Johnson. Our son is a web developer in Denver, and our daughter is an artist in Los Angeles and Rome. I enjoy twice yearly trips to Europe, speaking foreign languages (French, German, Italian, and Spanish), hiking in the mountains, and reading."
+  ],
+  "contactIntro": "Please send me a message if you have any questions.",
+  "location": "Colorado Springs, Colorado",
+  "phone": "719.640.0554",
+  "website": "www.maryjjohnson.com",
+  "socialLinks": [
+    {
+      "name": "twitter",
+      "handle": "JohnsonMaryJ",
+      "url": "https://twitter.com/JohnsonMaryJ"
+    },
+    {
+      "name": "linkedin",
+      "handle": "johnsonmaryj",
+      "url": "https://www.linkedin.com/in/johnsonmaryj/"
+    }
+  ]
+}

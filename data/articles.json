@@ -1,0 +1,59 @@
+[
+  {
+    "name":"Primary Source Librarian Blog",
+    "link": "https://www.maryjjohnson.com/primarysourcelibrarian/",
+    "order": 1
+  },
+  {
+    "name":"\"Primary Sources in Your Back Pocket\"",
+    "order": 2
+  },
+  {
+    "name": "Getting Started with Primary Source Teaching",
+    "order": 3
+  },
+  {
+    "name": "\"Teaching with Primary Source Texts\"",
+    "order": 4
+  },
+  {
+    "name": "\"Historic Newspapers - Before Blogs, Twitter, and 24-hour Cable News\"",
+    "order": 5
+  },
+  {
+    "name": "\"Photographs and Images - A Reality Check\"",
+    "order": 6
+  },
+  {
+    "name": "\"Historical Maps Updated\"",
+    "order": 7
+  },
+  {
+    "name": "\"Sound and Film as Primary Sources\"",
+    "order": 8
+  },
+  {
+    "name": "\"Object Lessons: Teaching with Artifacts and Ephemera\" - Online with Primary Sources series, 2010-1011.",
+    "order": 9
+  },
+  {
+    "name": "\"School Librarians as Reading Teachers\"",
+    "order": 10
+  },
+  {
+    "name": "\"Changing Spaces for Expository Reading\"",
+    "order": 11
+  },
+  {
+    "name": "\"The School Librarian - Every Student's Reading Teacher\"",
+    "order": 12
+  },
+  {
+    "name": "\"Programming for Non-Fiction Reading\" - Info Text series, 2011-2012.",
+    "order": 13
+  },
+  {
+    "name": "\"Primary Sources and Web 2.0: Unlikely Match or Made for Each Other?\" - Library Media Connection, Jan./Feb. 2009.",
+    "order": 14
+  }
+]
