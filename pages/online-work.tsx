@@ -1,5 +1,6 @@
 // pages/online-work.tsx
 import { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
 import { motion } from "framer-motion";
 import { OnlineWork } from "@/types/online-work";
 import { SocialLink } from "@/types/basics";
@@ -23,6 +24,16 @@ const OnlineWorkPage: NextPage<OnlineWorkPageProps> = ({
 }) => {
   return (
     <div className="mx-auto">
+      <Head>
+        <title>{`${name} | Online Work`}</title>
+        <meta
+          name="description"
+          content="Online work by Mary J Johnson."
+          key="desc"
+        />
+        <meta name="robots" content="index, follow" />
+      </Head>
+
       <Header socialLink={socialLinks[0]} />
 
       <motion.div

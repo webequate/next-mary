@@ -33,13 +33,19 @@ const Layout: React.FC<LayoutProps> = ({
         <meta
           property="og:description"
           content="Mary J Johnson's education consulting website."
+          key="ogdesc"
         />
         <meta
           property="og:image"
           content="https://portfolio.webequate.com/images/mary-og.jpg"
+          key="ogimage"
         />
-        <meta property="og:url" content="https://maryjjohnson.com" />
-        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://maryjjohnson.com"
+          key="ogurl"
+        />
+        <meta property="og:type" content="website" key="ogtype" />
         <link rel="icon" href="/mary.png" />
       </Head>
       <main className="min-h-screen bg-white dark:bg-neutral-900 sm:border-x border-dark-3 dark:border-light-3 px-4 sm:px-8 lg:px-16">

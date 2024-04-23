@@ -1,5 +1,6 @@
 // pages/articles.tsx
 import { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
 import { motion } from "framer-motion";
 import { Article } from "@/types/article";
 import { SocialLink } from "@/types/basics";
@@ -23,6 +24,16 @@ const ArticlesPage: NextPage<ArticlesPageProps> = ({
 }) => {
   return (
     <div className="mx-auto">
+      <Head>
+        <title>{`${name} | Articles`}</title>
+        <meta
+          name="description"
+          content="Articles by Mary J Johnson."
+          key="desc"
+        />
+        <meta name="robots" content="index, follow" />
+      </Head>
+
       <Header socialLink={socialLinks[0]} />
 
       <motion.div
