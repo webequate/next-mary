@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.maryjjohnson.com
+Host: https://maryjjohnson.com
 
 # Sitemaps
-Sitemap: https://www.maryjjohnson.com/sitemap.xml
+Sitemap: https://maryjjohnson.com/sitemap.xml
