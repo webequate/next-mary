@@ -37,7 +37,7 @@ const Layout: React.FC<LayoutProps> = ({
         />
         <meta
           property="og:image"
-          content="https://portfolio.webequate.com/images/mary-og.jpg"
+          content="https://maryjjohnson.com/images/mary-og.jpg"
           key="ogimage"
         />
         <meta
