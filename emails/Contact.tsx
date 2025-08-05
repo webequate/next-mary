@@ -30,8 +30,10 @@ const Contact: Template<ContactProps> = ({ name, email, subject, message }) => {
           <Text color={colors.lightSecondary} paddingBottom={4}>
             Website:
           </Text>
-          <Text color={colors.lightPrimary} paddingBottom={24}>
-            MaryJJohnson.com
+          <Text color={colors.lightAccent} paddingBottom={24}>
+            <a href="https://maryjjohnson.com" style={{ color: "inherit" }}>
+              MaryJJohnson.com
+            </a>
           </Text>
           <Text color={colors.lightSecondary} paddingBottom={4}>
             Name:
