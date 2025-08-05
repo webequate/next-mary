@@ -15,7 +15,15 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ socialLink }) => {
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
-  const route = router.pathname;
+  const asPath = router.asPath;
+
+  // Determine if the link should be active based on the prefix in the path
+  const isActive = (path: string) => {
+    if (path === "/") {
+      return asPath === "/" || asPath.startsWith("/featured"); // Home & featured
+    }
+    return asPath.startsWith(path); // Other prefixes
+  };
 
   function toggleMenu() {
     setShowMenu(!showMenu);
@@ -46,42 +54,42 @@ const Header: React.FC<HeaderProps> = ({ socialLink }) => {
               <Link
                 href="/"
                 aria-label="Home"
-                className={route === "/" ? "active" : ""}
+                className={isActive("/") ? "active" : ""}
               >
                 Home
               </Link>
               <Link
                 href="/about"
                 aria-label="About"
-                className={route === "/about" ? "active" : ""}
+                className={isActive("/about") ? "active" : ""}
               >
                 About
               </Link>
               <Link
                 href="/books"
                 aria-label="Books"
-                className={route === "/books" ? "active" : ""}
+                className={isActive("/books") ? "active" : ""}
               >
                 Books
               </Link>
               <Link
                 href="/articles"
                 aria-label="Articles"
-                className={route === "/articles" ? "active" : ""}
+                className={isActive("/articles") ? "active" : ""}
               >
                 Articles
               </Link>
               <Link
                 href="/online-work"
                 aria-label="Online Work"
-                className={route === "/online-work" ? "active" : ""}
+                className={isActive("/online-work") ? "active" : ""}
               >
                 Online Work
               </Link>
               <Link
                 href="/contact"
                 aria-label="Contact Me"
-                className={route === "/contact" ? "active" : ""}
+                className={isActive("/contact") ? "active" : ""}
               >
                 Contact Me
               </Link>
@@ -104,42 +112,42 @@ const Header: React.FC<HeaderProps> = ({ socialLink }) => {
           <Link
             href="/"
             aria-label="Home"
-            className={route === "/" ? "active" : ""}
+            className={isActive("/") ? "active" : ""}
           >
             Home
           </Link>
           <Link
             href="/about"
             aria-label="About"
-            className={route === "/about" ? "active" : ""}
+            className={isActive("/about") ? "active" : ""}
           >
             About
           </Link>
           <Link
             href="/books"
             aria-label="Books"
-            className={route === "/books" ? "active" : ""}
+            className={isActive("/books") ? "active" : ""}
           >
             Books
           </Link>
           <Link
             href="/articles"
             aria-label="Articles"
-            className={route === "/articles" ? "active" : ""}
+            className={isActive("/articles") ? "active" : ""}
           >
             Articles
           </Link>
           <Link
             href="/online-work"
             aria-label="Online Work"
-            className={route === "/online-work" ? "active" : ""}
+            className={isActive("/online-work") ? "active" : ""}
           >
             Online Work
           </Link>
           <Link
             href="/contact"
             aria-label="Contact"
-            className={route === "/contact" ? "active" : ""}
+            className={isActive("/contact") ? "active" : ""}
           >
             Contact Me
           </Link>
