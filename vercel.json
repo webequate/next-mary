@@ -1,0 +1,30 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.maryjjohnson.com"
+        }
+      ],
+      "destination": "https://maryjjohnson.com/:path*",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
+        },
+        {
+          "key": "Link",
+          "value": "<https://maryjjohnson.com>; rel=\"canonical\""
+        }
+      ]
+    }
+  ]
+}
