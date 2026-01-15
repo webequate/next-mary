@@ -32,6 +32,7 @@ const ArticlesPage: NextPage<ArticlesPageProps> = ({
           key="desc"
         />
         <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://maryjjohnson.com/articles" />
       </Head>
 
       <Header socialLink={socialLinks[0]} />

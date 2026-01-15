@@ -29,6 +29,7 @@ const BooksPage: NextPage<BooksPageProps> = ({ name, socialLinks, books }) => {
           key="desc"
         />
         <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://maryjjohnson.com/books" />
       </Head>
 
       <Header socialLink={socialLinks[0]} />

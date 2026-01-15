@@ -36,6 +36,7 @@ const ContactPage: NextPage<ContactPageProps> = ({
           key="desc"
         />
         <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://maryjjohnson.com/contact" />
       </Head>
 
       <Header socialLink={socialLinks[0]} />

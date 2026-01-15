@@ -4,11 +4,13 @@ import { useEffect } from "react";
 
 interface LayoutProps {
   title?: string;
+  canonical?: string;
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({
   title = "Mary J Johnson",
+  canonical,
   children,
 }) => {
   useEffect(() => {
@@ -46,6 +48,7 @@ const Layout: React.FC<LayoutProps> = ({
           key="ogurl"
         />
         <meta property="og:type" content="website" key="ogtype" />
+        {canonical && <link rel="canonical" href={canonical} />}
         <link rel="icon" href="/mary.png" />
       </Head>
       <main className="min-h-screen bg-white dark:bg-neutral-900 sm:border-x border-dark-3 dark:border-light-3 px-4 sm:px-8 lg:px-16">

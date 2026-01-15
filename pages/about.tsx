@@ -34,6 +34,7 @@ const AboutPage: NextPage<AboutPageProps> = ({
         <title>{`${name} | About`}</title>
         <meta name="description" content="About Mary J Johnson." key="desc" />
         <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://maryjjohnson.com/about" />
       </Head>
 
       <Header socialLink={socialLinks[0]} />
