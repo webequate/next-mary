@@ -10,6 +10,7 @@ const ContactForm: React.FC = () => {
     email: "",
     subject: "",
     message: "",
+    website: "", // honeypot field
   });
 
   const handleChange = (
@@ -21,6 +22,11 @@ const ContactForm: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    // Honeypot check - if filled, it's likely a bot
+    if (formData.website) {
+      return; // Silently reject bot submissions
+    }
     const response = await fetch("/api/send-email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -35,6 +41,7 @@ const ContactForm: React.FC = () => {
       email: "",
       subject: "",
       message: "",
+      website: "",
     });
   };
 
@@ -78,6 +85,21 @@ const ContactForm: React.FC = () => {
           onChange={handleChange}
           value={formData.subject}
         />
+
+        {/* Honeypot field - hidden from humans but visible to bots */}
+        <div
+          style={{ position: "absolute", left: "-9999px" }}
+          aria-hidden="true"
+        >
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            onChange={handleChange}
+            value={formData.website || ""}
+          />
+        </div>
 
         <div className="mb-4">
           <label
