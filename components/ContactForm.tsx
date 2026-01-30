@@ -1,4 +1,6 @@
 // components/ContactForm.tsx
+"use client";
+
 import { useState } from "react";
 import { ContactForm as ContactFormData } from "@/interfaces/ContactForm";
 import Heading from "@/components/Heading";
