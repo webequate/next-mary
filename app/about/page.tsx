@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import AboutContent from "@/components/AboutContent";
 import AboutDetails from "@/components/AboutDetails";
 import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
+import PageContent from "@/components/PageContent";
 
 export default function AboutPage() {
   const { aboutIntro, aboutItems, name, location, phone, website, socialLinks } = basics;
@@ -14,7 +14,7 @@ export default function AboutPage() {
     <div>
       <Header socialLink={socialLinks[0]} />
 
-      <PageTransition>
+      <PageContent>
         <div className="flex flex-col lg:flex-row-reverse text-base text-dark-2 dark:text-light-2">
           <div className="w-full lg:w-3/5 mb-2 lg:mb-0 lg:ml-6">
             <AboutContent aboutIntro={aboutIntro} aboutItems={aboutItems} />
@@ -29,7 +29,7 @@ export default function AboutPage() {
             />
           </div>
         </div>
-      </PageTransition>
+      </PageContent>
 
       <Footer name={name} socialLinks={socialLinks} />
     </div>

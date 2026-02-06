@@ -7,7 +7,7 @@ import Heading from "@/components/Heading";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import PageTransition from "@/components/PageTransition";
+import PageContent from "@/components/PageContent";
 
 export default function BooksPage() {
   const { name, socialLinks } = basics;
@@ -16,7 +16,7 @@ export default function BooksPage() {
     <div>
       <Header socialLink={socialLinks[0]} />
 
-      <PageTransition className={"text-base text-dark-2 dark:text-light-2"}>
+      <PageContent className="text-base text-dark-2 dark:text-light-2">
         <Heading text="Books" />
         <ul className="flex justify-between">
           {books.map((book, index) => (
@@ -38,7 +38,7 @@ export default function BooksPage() {
             </li>
           ))}
         </ul>
-      </PageTransition>
+      </PageContent>
 
       <Footer name={name} socialLinks={socialLinks} />
     </div>

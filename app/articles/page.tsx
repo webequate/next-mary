@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Heading from "@/components/Heading";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
+import PageContent from "@/components/PageContent";
 
 export default function ArticlesPage() {
   const { name, socialLinks } = basics;
@@ -15,7 +15,7 @@ export default function ArticlesPage() {
     <div>
       <Header socialLink={socialLinks[0]} />
 
-      <PageTransition className={"text-base text-dark-2 dark:text-light-2"}>
+      <PageContent className="text-base text-dark-2 dark:text-light-2">
         <Heading text="Articles" />
         <ul className="list-disc list-outside ml-5">
           {articles.map((article, index) => (
@@ -32,7 +32,7 @@ export default function ArticlesPage() {
             </li>
           ))}
         </ul>
-      </PageTransition>
+      </PageContent>
 
       <Footer name={name} socialLinks={socialLinks} />
     </div>

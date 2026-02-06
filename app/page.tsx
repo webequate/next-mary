@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Social from "@/components/Social";
 import ThemedImage from "@/components/ThemedImage";
 import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
+import PageContent from "@/components/PageContent";
 
 export default function HomePage() {
   const { name, titles, summaryItems, socialLinks } = basics;
@@ -14,7 +14,7 @@ export default function HomePage() {
     <div>
       <Header socialLink={socialLinks[0]} />
 
-      <PageTransition>
+      <PageContent>
         <div className="flex flex-col-reverse lg:flex-row">
           <div className="w-full lg:w-3/5 mb-10 lg:mb-0 md:mr-6">
             <div className="mb-6 text-lg sm:text-xl md:text-xl lg:text-2xl font-bold tracking-tight text-accent-dark dark:text-accent-light">
@@ -40,12 +40,10 @@ export default function HomePage() {
           </div>
 
           <div className="w-full lg:w-2/5 mb-10 lg:mb-0 md:ml-6">
-            <PageTransition>
-              <ThemedImage />
-            </PageTransition>
+            <ThemedImage />
           </div>
         </div>
-      </PageTransition>
+      </PageContent>
       <Footer name={name} socialLinks={socialLinks} />
     </div>
   );

@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import ContactForm from "@/components/ContactForm";
 import ContactDetails from "@/components/ContactDetails";
 import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
+import PageContent from "@/components/PageContent";
 
 export default function ContactPage() {
   const { name, contactIntro, location, phone, website, socialLinks } = basics;
@@ -14,7 +14,7 @@ export default function ContactPage() {
     <div>
       <Header socialLink={socialLinks[0]} />
 
-      <PageTransition>
+      <PageContent>
         <div className="flex flex-col-reverse lg:flex-row text-base text-dark-2 dark:text-light-2">
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0 md:mr-6">
             <ContactForm />
@@ -30,7 +30,7 @@ export default function ContactPage() {
             />
           </div>
         </div>
-      </PageTransition>
+      </PageContent>
 
       <Footer name={name} socialLinks={socialLinks} />
     </div>

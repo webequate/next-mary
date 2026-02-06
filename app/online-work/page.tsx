@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import Heading from "@/components/Heading";
-import PageTransition from "@/components/PageTransition";
+import PageContent from "@/components/PageContent";
 
 export default function OnlineWorkPage() {
   const { name, socialLinks } = basics;
@@ -15,7 +15,7 @@ export default function OnlineWorkPage() {
     <div>
       <Header socialLink={socialLinks[0]} />
 
-      <PageTransition className={"text-base text-dark-2 dark:text-light-2"}>
+      <PageContent className="text-base text-dark-2 dark:text-light-2">
         <Heading text="Online Work" />
         <ul className="list-disc list-outside ml-5">
           {onlineWorks.map((onlineWork, index) => (
@@ -29,7 +29,7 @@ export default function OnlineWorkPage() {
             </li>
           ))}
         </ul>
-      </PageTransition>
+      </PageContent>
 
       <Footer name={name} socialLinks={socialLinks} />
     </div>

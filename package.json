@@ -21,7 +21,6 @@
     "@next/third-parties": "^16.1.6",
     "@tailwindcss/forms": "^0.5.3",
     "@types/react-dom": "^18.2.25",
-    "framer-motion": "^10.12.12",
     "mailing-core": "^1.0.0",
     "mjml": "^4.14.1",
     "mjml-react": "^2.0.8",
