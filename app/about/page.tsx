@@ -8,7 +8,15 @@ import Footer from "@/components/Footer";
 import PageContent from "@/components/PageContent";
 
 export default function AboutPage() {
-  const { aboutIntro, aboutItems, name, location, phone, website, socialLinks } = basics;
+  const {
+    aboutIntro,
+    aboutItems,
+    name,
+    location,
+    phone,
+    website,
+    socialLinks,
+  } = basics;
 
   return (
     <div>

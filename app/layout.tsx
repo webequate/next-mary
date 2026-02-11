@@ -45,17 +45,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/mary.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap"
-          rel="stylesheet"
-        />
       </head>
       <body>
         <Providers>
-          <div className="flex flex-col min-h-screen">
-            <div className="flex-1 mx-auto w-full max-w-7xl sm:px-8 lg:px-16">
+          <div className="flex flex-col items-center min-h-screen">
+            <div className="w-full max-w-7xl sm:px-8 lg:px-16">
               <Layout>{children}</Layout>
               <UseScrollToTop />
             </div>

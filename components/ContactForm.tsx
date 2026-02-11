@@ -14,6 +14,11 @@ const ContactForm: React.FC = () => {
     message: "",
     website: "", // honeypot field
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [statusType, setStatusType] = useState<"success" | "error" | null>(
+    null
+  );
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,22 +34,39 @@ const ContactForm: React.FC = () => {
     if (formData.website) {
       return; // Silently reject bot submissions
     }
-    const response = await fetch("/api/send-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    setIsSubmitting(true);
+    setStatusMessage(null);
+    setStatusType(null);
 
-    const result = await response.json();
-    alert(result.message);
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-      website: "",
-    });
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatusType("success");
+        setStatusMessage(result.message || "Message sent successfully.");
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+          website: "",
+        });
+      } else {
+        setStatusType("error");
+        setStatusMessage(result.message || "Message failed to send.");
+      }
+    } catch (error) {
+      setStatusType("error");
+      setStatusMessage("Message failed to send.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -127,10 +149,24 @@ const ContactForm: React.FC = () => {
           <button
             type="submit"
             aria-label="Send Message"
-            className="text-light-1 dark:text-light-1 bg-accent-dark dark:bg-accent-dark hover:bg-accent-light dark:hover:bg-accent-light font-general-medium flex justify-center items-center w-40 sm:w-40 mb-6 sm:mb-0 text-lg py-2.5 sm:py-3 rounded-lg duration-300"
+            className="text-light-1 dark:text-light-1 bg-accent-dark dark:bg-accent-dark hover:bg-accent-light dark:hover:bg-accent-light font-general-medium flex justify-center items-center w-40 sm:w-40 mb-2 text-lg py-2.5 sm:py-3 rounded-lg duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
           >
-            <span className="text-sm sm:text-lg">Send Message</span>
+            <span className="text-sm sm:text-lg">
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </span>
           </button>
+          {statusMessage && (
+            <p
+              className={`text-sm sm:text-base ${
+                statusType === "success"
+                  ? "text-green-600 dark:text-green-400"
+                  : "text-red-600 dark:text-red-400"
+              }`}
+            >
+              {statusMessage}
+            </p>
+          )}
         </div>
       </form>
     </div>
