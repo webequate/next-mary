@@ -2,12 +2,12 @@
 
 Track which pages have been indexed by Google or have had indexing requested.
 
-- [ ] https://maryjjohnson.com
-- [ ] https://maryjjohnson.com/about
-- [ ] https://maryjjohnson.com/articles
-- [ ] https://maryjjohnson.com/books
-- [ ] https://maryjjohnson.com/contact
-- [ ] https://maryjjohnson.com/online-work
+- [x] https://maryjjohnson.com
+- [x] https://maryjjohnson.com/about
+- [x] https://maryjjohnson.com/articles
+- [x] https://maryjjohnson.com/books
+- [x] https://maryjjohnson.com/contact
+- [x] https://maryjjohnson.com/online-work
 
 ---
 

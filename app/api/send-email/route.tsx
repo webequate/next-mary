@@ -1,35 +1,60 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { ContactForm } from "@/interfaces/ContactForm";
-import { siteConfig } from "@/lib/metadata";
 
+// Ensure this route is always dynamic (no prerender) and uses the Node.js runtime
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const transport = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASS,
-  },
-});
+function validate(formData: ContactForm) {
+  const errors: string[] = [];
 
-const escapeHtml = (value: string) =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+  // Honeypot check - if filled, it's a bot
+  if (formData.website) {
+    errors.push("Bot submission detected");
+  }
 
-const renderContactEmail = (formData: ContactForm) => {
+  if (!formData.name?.trim()) errors.push("Name is required");
+  if (!formData.email?.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/))
+    errors.push("Valid email is required");
+  if (!formData.subject?.trim()) errors.push("Subject is required");
+  if (!formData.message?.trim()) errors.push("Message is required");
+  return errors;
+}
+
+function escapeHtml(text: string): string {
+  const map: { [key: string]: string } = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  };
+  return text.replace(/[&<>"']/g, (char) => map[char]);
+}
+
+function buildReplyMailto(formData: ContactForm): string {
+  const quotedMessage = formData.message
+    .split("\n")
+    .map((line) => "> " + line)
+    .join("\n");
+
+  const subject = `Re: ${formData.subject}`;
+  const body = `\n\n${quotedMessage}`;
+
+  const mailtoHref = `mailto:${encodeURIComponent(
+    formData.email
+  )}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return mailtoHref;
+}
+
+function buildHtmlEmail(formData: ContactForm, receivedAt: string): string {
   const name = escapeHtml(formData.name);
   const email = escapeHtml(formData.email);
   const subject = escapeHtml(formData.subject || "New contact form submission");
   const message = escapeHtml(formData.message).replace(/\n/g, "<br />");
-  const logoUrl = `${siteConfig.url}/assets/logo-webequate-light.png`;
+  const logoUrl = "https://maryjjohnson.com/assets/logo-webequate-light.png";
+  const replyMailto = buildReplyMailto(formData);
 
   return `<!doctype html>
 <html lang="en">
@@ -41,7 +66,7 @@ const renderContactEmail = (formData: ContactForm) => {
   <body style="margin:0; padding:24px; font-family: Arial, Helvetica, sans-serif; background:#0b1020; color:#e2e8f0;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:680px; margin:0 auto; background:#0f172a; border-radius:16px; overflow:hidden; border:1px solid #1f2937;">
       <tr>
-        <td style="padding:20px 24px; background:#0b1224; border-bottom:1px solid #1f2937;">
+        <td style="padding:20px 24px; background:#0b1224; border-bottom:1px solid #1f2937; text-align:center;">
           <a href="https://webequate.com" target="_blank" rel="noopener" style="display:inline-block; text-decoration:none;">
             <img src="${logoUrl}" alt="" role="presentation" width="160" height="40" style="display:block; width:160px; height:auto; border:0; outline:none; text-decoration:none;" />
           </a>
@@ -49,78 +74,118 @@ const renderContactEmail = (formData: ContactForm) => {
       </tr>
       <tr>
         <td style="padding:24px; color:#cbd5f5; font-size:14px;">
-          <h1 style="margin:0 0 12px 0; font-size:20px; line-height:1.3; color:#f8fafc;">New contact form submission</h1>
+          <h1 style="margin:0 0 12px 0; font-size:20px; line-height:1.3; color:#f8fafc;">Contact Form Submission</h1>
           <p style="margin:0 0 20px 0; color:#94a3b8;">Website: <a href="https://maryjjohnson.com" style="color:#93c5fd; text-decoration:none;">MaryJJohnson.com</a></p>
 
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0b1224; border:1px solid #1f2937; border-radius:12px;">
             <tr>
               <td style="padding:16px 18px;">
                 <p style="margin:0 0 6px 0; color:#94a3b8; font-size:12px; text-transform:uppercase; letter-spacing:0.06em;">Name</p>
-                <p style="margin:0 0 14px 0; color:#e2e8f0; font-size:15px;">${name}</p>
+                <p style="margin:0 0 20px 0; padding-bottom:20px; border-bottom:1px solid #1f2937; color:#e2e8f0; font-size:15px;">${name}</p>
                 <p style="margin:0 0 6px 0; color:#94a3b8; font-size:12px; text-transform:uppercase; letter-spacing:0.06em;">Email</p>
-                <p style="margin:0 0 14px 0; color:#e2e8f0; font-size:15px;"><a href="mailto:${email}" style="color:#93c5fd; text-decoration:none;">${email}</a></p>
+                <p style="margin:0 0 20px 0; padding-bottom:20px; border-bottom:1px solid #1f2937; color:#e2e8f0; font-size:15px;"><a href="mailto:${email}" style="color:#93c5fd; text-decoration:none;">${email}</a></p>
                 <p style="margin:0 0 6px 0; color:#94a3b8; font-size:12px; text-transform:uppercase; letter-spacing:0.06em;">Subject</p>
-                <p style="margin:0 0 14px 0; color:#e2e8f0; font-size:15px;">${subject}</p>
+                <p style="margin:0 0 20px 0; padding-bottom:20px; border-bottom:1px solid #1f2937; color:#e2e8f0; font-size:15px;">${subject}</p>
                 <p style="margin:0 0 6px 0; color:#94a3b8; font-size:12px; text-transform:uppercase; letter-spacing:0.06em;">Message</p>
-                <p style="margin:0; color:#e2e8f0; line-height:1.7; font-size:15px;">${message}</p>
+                <p style="margin:0 0 0px 0; color:#e2e8f0; line-height:1.7; font-size:15px;">${message}</p>
               </td>
             </tr>
           </table>
+          <p style="margin:16px 0 0px 0;">
+            <a href="${replyMailto}" style="display:inline-block; color:#93c5fd; padding:8px 0; text-decoration:none; font-weight:500;">Reply to ${name}</a>
+          </p>
         </td>
       </tr>
       <tr>
-        <td style="padding:16px 24px 22px 24px; color:#64748b; font-size:12px;">
-          Need help? Reach out to <a href="mailto:webequate@gmail.com" style="color:#93c5fd; text-decoration:none;">WebEquate</a> at any time.
+        <td style="padding:20px 24px; background:#0b1224; border-top:1px solid #1f2937; text-align:center;">
+          <a href="mailto:webequate@gmail.com" style="color:#93c5fd; text-decoration:none;">Reach out to WebEquate</a>
         </td>
       </tr>
     </table>
   </body>
 </html>`;
-};
+}
+
+function buildPlainText(formData: ContactForm, receivedAt: string): string {
+  const lines = [
+    "Website Contact Submission",
+    "================================",
+    "",
+    `Website: https://maryjjohnson.com`,
+    `Name: ${formData.name}`,
+    `Email: ${formData.email}`,
+    `Subject: ${formData.subject}`,
+    `Received: ${receivedAt}`,
+    "",
+    "Message:",
+    "--------",
+    formData.message.trim(),
+    "",
+    "================================",
+    "This email was generated automatically from the contact form.",
+    "Delivered by WebEquate",
+  ];
+  return lines.join("\n");
+}
 
 async function sendEmail(formData: ContactForm) {
-  const to = process.env.EMAIL_TO;
-  const from = process.env.EMAIL_FROM || process.env.GMAIL_USER;
-  const cc = process.env.EMAIL_CC;
-
-  if (!to || !from) {
-    throw new Error("Email environment variables are not configured.");
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASS) {
+    throw new Error(
+      "Email transport credentials missing (GMAIL_USER/GMAIL_APP_PASS)"
+    );
+  }
+  if (!process.env.EMAIL_FROM || !process.env.EMAIL_TO) {
+    throw new Error("EMAIL_FROM and EMAIL_TO must be set");
   }
 
-  const subject = formData.subject || "New contact form submission";
-  const text = `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${subject}\nMessage: ${formData.message}`;
+  const receivedAt = new Date().toISOString();
+  const html = buildHtmlEmail(formData, receivedAt);
+  const text = buildPlainText(formData, receivedAt);
 
-  await transport.sendMail({
-    from,
-    to,
-    cc,
-    subject,
+  // Create transport (on-demand to avoid build-time fs scans)
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASS,
+    },
+  });
+
+  await transporter.sendMail({
+    from: process.env.EMAIL_FROM,
+    to: process.env.EMAIL_TO,
+    cc: process.env.EMAIL_CC,
+    subject: `Website Inquiry: ${formData.subject}`,
+    html,
     text,
-    html: renderContactEmail(formData),
   });
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
     const formData: ContactForm = await request.json();
-
-    // Honeypot check - if website field is filled, it's likely a bot
-    if (formData.website) {
+    const errors = validate(formData);
+    if (errors.length) {
       return NextResponse.json(
-        { message: "Invalid submission." },
+        { message: "Validation failed", errors },
         { status: 400 }
       );
     }
-
     await sendEmail(formData);
+    return NextResponse.json({ message: "Email sent successfully!" });
+  } catch (e: any) {
+    const devDetails =
+      process.env.NODE_ENV !== "production" ? e?.message : undefined;
     return NextResponse.json(
-      { message: "Email sent successfully!" },
-      { status: 200 }
-    );
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Error sending email." },
+      { message: "Error sending email.", error: devDetails },
       { status: 500 }
     );
   }
+}
+
+// Simple reachability test
+export async function GET() {
+  return NextResponse.json({ ok: true, route: "send-email" });
 }
