@@ -48,7 +48,7 @@ function buildReplyMailto(formData: ContactForm): string {
   return mailtoHref;
 }
 
-function buildHtmlEmail(formData: ContactForm, receivedAt: string): string {
+function buildHtmlEmail(formData: ContactForm): string {
   const name = escapeHtml(formData.name);
   const email = escapeHtml(formData.email);
   const subject = escapeHtml(formData.subject || "New contact form submission");
@@ -139,7 +139,7 @@ async function sendEmail(formData: ContactForm) {
   }
 
   const receivedAt = new Date().toISOString();
-  const html = buildHtmlEmail(formData, receivedAt);
+  const html = buildHtmlEmail(formData);
   const text = buildPlainText(formData, receivedAt);
 
   // Create transport (on-demand to avoid build-time fs scans)

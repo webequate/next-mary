@@ -61,7 +61,7 @@ const ContactForm: React.FC = () => {
         setStatusType("error");
         setStatusMessage(result.message || "Message failed to send.");
       }
-    } catch (error) {
+    } catch {
       setStatusType("error");
       setStatusMessage("Message failed to send.");
     } finally {

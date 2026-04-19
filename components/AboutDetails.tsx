@@ -8,12 +8,7 @@ interface AboutDetailsProps {
   website: string;
 }
 
-const AboutDetails: React.FC<AboutDetailsProps> = ({
-  name,
-  location,
-  phone,
-  website,
-}) => {
+const AboutDetails: React.FC<AboutDetailsProps> = () => {
   return (
     <div className="text-base text-left text-dark-2 dark:text-light-2 mt-0">
       <Image
