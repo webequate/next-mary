@@ -21,10 +21,10 @@ const ThemedImage = () => {
     <Image
       src={src}
       alt="Mary"
-      width={574}
-      height={574}
+      width={400}
+      height={423}
       priority
-      className="w-100 h-100 rounded-xl bg-light-1 dark:bg-dark-1 ring-1 ring-dark-3 dark:ring-light-3"
+      className="w-full h-auto rounded-xl bg-light-1 dark:bg-dark-1 ring-1 ring-dark-3 dark:ring-light-3"
     />
   );
 };

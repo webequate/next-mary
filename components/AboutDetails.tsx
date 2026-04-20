@@ -17,7 +17,7 @@ const AboutDetails: React.FC<AboutDetailsProps> = () => {
         width={400}
         height={423}
         priority
-        className="w-100 h-100 rounded-xl ring-1 ring-dark-3 dark:ring-light-3 md:mr-4"
+        className="w-full h-auto rounded-xl ring-1 ring-dark-3 dark:ring-light-3 md:mr-4"
       />
     </div>
   );

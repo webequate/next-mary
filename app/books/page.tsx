@@ -32,8 +32,7 @@ export default function BooksPage() {
                   alt={book.name}
                   width={300}
                   height={400}
-                  style={{ height: "auto" }}
-                  className="rounded shadow-md transition ease-in-out transform duration-300"
+                  className="w-full h-auto rounded shadow-md transition ease-in-out transform duration-300"
                 />
               </Link>
             </li>
