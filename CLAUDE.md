@@ -402,6 +402,66 @@ The root layout (`app/layout.tsx`) sets the base metadata directly using `siteCo
 
 ---
 
+## Testing
+
+The project uses **Vitest** + **React Testing Library** (jsdom environment).
+
+### Configuration
+
+| File | Purpose |
+|---|---|
+| `vitest.config.ts` | Vitest config: jsdom environment, `@vitejs/plugin-react`, `@/` alias |
+| `vitest.setup.ts` | Global setup: `@testing-library/jest-dom` matchers + Next.js module mocks |
+
+### Global mocks (vitest.setup.ts)
+
+- **`next/font/google`** — stubbed because `lib/fonts.ts` calls `Belgrano()` at import time (a Next.js build-time API that fails in jsdom). Any component that transitively imports `lib/fonts.ts` needs this mock.
+- **`next/link`** — rendered as a plain `<a>` so tests don't need a router context.
+- **`next/navigation`** — `usePathname` mocked to return `"/"` by default; override per-test with `vi.mocked(usePathname).mockReturnValue("/your-path")`.
+
+### Test structure
+
+```
+__tests__/
+├── lib/
+│   └── metadata.test.ts          # siteConfig constants + getPageMetadata() output
+├── hooks/
+│   └── useThemeSwitcher.test.tsx # localStorage restore, no-loop guarantee, class management
+└── components/
+    ├── ContactForm.test.tsx       # submission, error paths, honeypot, field reset, payload
+    ├── Footer.test.tsx            # nav links, isActive logic
+    ├── FormInput.test.tsx         # label, type, placeholder, onChange, required
+    ├── Hamburger.test.tsx         # toggle callback, icon swap
+    ├── Header.test.tsx            # nav links, isActive logic, hamburger open/close
+    ├── PageContent.test.tsx       # children rendering, className, pathname change
+    ├── SocialButton.test.tsx      # URL, target, icon dispatch for all 6 networks
+    └── ThemeSwitcher.test.tsx     # mount guard, light→dark, dark→light
+```
+
+Purely presentational components (no logic, state, or interactivity) are intentionally not tested.
+
+### Commands
+
+```bash
+npm test               # vitest watch mode
+npm run test:run       # single run (local)
+npm run test:ci        # single run (CI)
+```
+
+### Adding new tests
+
+- Put test files under `__tests__/` mirroring the source tree.
+- If a new component imports `next/font/google` (directly or via `lib/fonts.ts`), the global mock in `vitest.setup.ts` already handles it — no per-file mock needed.
+- If a component uses `next-themes` `useTheme`, mock it at the top of the test file:
+  ```ts
+  vi.mock("next-themes", () => ({
+    useTheme: vi.fn(() => ({ theme: "light", setTheme: vi.fn() })),
+  }));
+  ```
+- Use `vi.mocked(usePathname).mockReturnValue("/path")` inside individual tests to simulate active nav states.
+
+---
+
 ## Commands
 
 ```bash
@@ -410,6 +470,7 @@ npm run build          # production build
 npm run lint           # eslint . (ESLint v9 flat config)
 npm run format         # prettier --write on all source files
 npm run build:sitemap  # next-sitemap + custom sort script
+npm run test:run       # run full test suite once
 ```
 
 ---
