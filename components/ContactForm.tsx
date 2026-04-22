@@ -158,6 +158,7 @@ const ContactForm: React.FC = () => {
           </button>
           {statusMessage && (
             <p
+              role="alert"
               className={`text-sm sm:text-base ${
                 statusType === "success"
                   ? "text-green-600 dark:text-green-400"
